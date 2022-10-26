@@ -12,7 +12,7 @@ class Test extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: TextButton.icon(
-          onPressed: () => context.go('/'),
+          onPressed: () => context.pop(),
           icon: const Icon(Icons.arrow_back_ios),
           label: const Text(''),
           style: ButtonStyle(

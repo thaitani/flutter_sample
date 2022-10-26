@@ -11,16 +11,17 @@ import 'package:flutter_sample/page/test.dart';
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
     GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const MyHomePage(title: 'Flutter Demo Home Page');
-      },
-    ),
-    GoRoute(
-      path: '/test',
-      builder: (BuildContext context, GoRouterState state) {
-        return const Test();
-      },
-    ),
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return const MyHomePage(title: 'Flutter Demo Home Page');
+        },
+        routes: [
+          GoRoute(
+            path: 'test',
+            builder: (BuildContext context, GoRouterState state) {
+              return const Test();
+            },
+          ),
+        ]),
   ],
 );
