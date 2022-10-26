@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,7 +22,7 @@ class MyHomePage extends ConsumerWidget {
         ref.read(counterProvider.notifier).update((state) => state + index);
 
     void resetCounter() =>
-        ref.read(counterProvider.notifier).update(((state) => 0));
+        ref.read(counterProvider.notifier).update((state) => 0);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -64,7 +67,7 @@ class MyHomePage extends ConsumerWidget {
             TextButton.icon(
               onPressed: () => context.go('/test'),
               icon: const Icon(Icons.navigate_next),
-              label: const Text("go test"),
+              label: const Text('go test'),
             )
           ],
         ),
