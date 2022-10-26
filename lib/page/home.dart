@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+final counterProvider = StateProvider<int>((ref) => 0);
+
+class MyHomePage extends ConsumerWidget {
+  const MyHomePage({
+    super.key,
+    required this.title,
+  });
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(counterProvider);
+    void multiIncrementCounter(int index) =>
+        ref.read(counterProvider.notifier).update((state) => state + index);
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _multiIncrementCounter(int count) {
-    setState(() {
-      _counter = _counter + count;
-    });
-  }
-
-  void _resetCount() {
-    setState(() {
-      _counter = 0;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+    void resetCounter() =>
+        ref.read(counterProvider.notifier).update(((state) => 0));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
-          widget.title,
+          title,
           style: TextStyle(
             color: Theme.of(context).secondaryHeaderColor,
           ),
@@ -44,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '$counter',
               style: Theme.of(context).textTheme.headline4,
             ),
             ...List.generate(
@@ -62,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     TextButton.icon(
                       icon: const Icon(Icons.add),
                       label: Text(index.toString()),
-                      onPressed: () => _multiIncrementCounter(index),
+                      onPressed: () => multiIncrementCounter(index),
                     ),
                   ],
                 ),
@@ -77,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _resetCount,
+        onPressed: resetCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.restart_alt_outlined),
       ),

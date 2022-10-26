@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample/router.dart';
 
 void main() {
@@ -10,12 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blueGrey,
+    return ProviderScope(
+      child: MaterialApp.router(
+        routerConfig: router,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorSchemeSeed: Colors.blueGrey,
+        ),
       ),
     );
   }
